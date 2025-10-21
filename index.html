@@ -13,7 +13,7 @@
     <style>
         :root {
             --font-family: 'Poppins', sans-serif;
-            --primary-color: #FF6B35; /* د DOGS لپاره نارنجي رنګ */
+            --primary-color: #FF6B35;
             --secondary-color: #FF9F1C;
             --accent-color: #FFB347;
             --background-light: #F8F9FA;
@@ -29,11 +29,11 @@
             --success: #2ECC71;
             --danger: #E74C3C;
             --pending: #F39C12;
-            --usdt-color: #26A17B;
             --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             --card-shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.15);
             --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #FF9F1C 100%);
             --gradient-secondary: linear-gradient(135deg, #FF9F1C 0%, #FFB347 100%);
+            --gradient-rainbow: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFB347, #FFD166, #06D6A0, #118AB2, #073B4C);
         }
         
         * { 
@@ -94,7 +94,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             color: white;
         }
         
@@ -166,7 +166,7 @@
         
         /* هدر ډیزاین */
         .app-header {
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             color: white;
             padding: 25px 20px;
             border-radius: 0 0 30px 30px;
@@ -295,7 +295,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             opacity: 0.1;
         }
         
@@ -340,13 +340,17 @@
             padding: 20px; 
             border-radius: 20px; 
             text-align: center; 
-            background: var(--gradient-primary);
             color: white;
             box-shadow: var(--card-shadow);
             transition: transform 0.3s;
             position: relative;
             overflow: hidden;
         }
+        
+        .stat-card:nth-child(1) { background: linear-gradient(135deg, #FF6B35 0%, #FF9F1C 100%); }
+        .stat-card:nth-child(2) { background: linear-gradient(135deg, #FF9F1C 0%, #FFB347 100%); }
+        .stat-card:nth-child(3) { background: linear-gradient(135deg, #FFB347 0%, #FFD166 100%); }
+        .stat-card:nth-child(4) { background: linear-gradient(135deg, #06D6A0 0%, #118AB2 100%); }
         
         .stat-card:before {
             content: '';
@@ -395,7 +399,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             opacity: 0.05;
         }
         
@@ -415,7 +419,7 @@
         
         .bar { 
             width: 12%; 
-            background: var(--gradient-primary); 
+            background: var(--gradient-rainbow); 
             border-radius: 10px 10px 0 0; 
             position: relative; 
             cursor: pointer; 
@@ -462,12 +466,25 @@
             border-radius: 50px; 
             cursor: pointer; 
             transition: all 0.3s; 
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-btn:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
         }
         
         .action-btn:hover {
@@ -505,7 +522,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             opacity: 0.1;
         }
         
@@ -523,7 +540,7 @@
             height: 50px; 
             border-radius: 50%; 
             object-fit: cover; 
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -545,7 +562,7 @@
         
         /* دایروی والیټ کارډونه */
         .wallet-card {
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             color: white;
             border-radius: 25px;
             padding: 25px;
@@ -580,7 +597,7 @@
         
         /* دایروی ریفرل کارډ */
         .referral-card {
-            background: var(--gradient-secondary);
+            background: var(--gradient-rainbow);
             color: white;
             border-radius: 25px;
             padding: 25px;
@@ -659,7 +676,7 @@
         }
         
         .nav-btn.active i {
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             color: white;
             transform: scale(1.1);
             box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
@@ -699,7 +716,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             opacity: 0.1;
         }
         
@@ -719,7 +736,7 @@
             border: none; 
             border-radius: 50px; 
             color: #fff; 
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             cursor: pointer; 
             font-weight: 600;
             transition: transform 0.2s;
@@ -846,7 +863,7 @@
             content: '';
             flex-grow: 1;
             height: 3px;
-            background: var(--gradient-primary);
+            background: var(--gradient-rainbow);
             border-radius: 3px;
         }
         
@@ -950,7 +967,7 @@
         .progress-bar-fg { 
             height: 100%; 
             border-radius: 10px; 
-            background: var(--gradient-primary); 
+            background: var(--gradient-rainbow); 
             transition: width 0.3s ease; 
         }
         
@@ -981,7 +998,7 @@
         
         /* د ویډرا شرط ښکاره کول */
         .withdrawal-requirement {
-            background: var(--gradient-secondary);
+            background: var(--gradient-rainbow);
             color: white;
             padding: 20px;
             border-radius: 20px;
@@ -1042,58 +1059,6 @@
             white-space: nowrap;
         }
         
-        /* د ویډرا میتود ټوګل */
-        .withdraw-method-toggle {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 15px;
-            background-color: var(--surface-light);
-            border-radius: 20px;
-            padding: 5px;
-            box-shadow: var(--card-shadow);
-        }
-        
-        .dark-theme .withdraw-method-toggle {
-            background-color: var(--surface-dark);
-        }
-        
-        .withdraw-toggle-btn {
-            padding: 12px 20px;
-            border: none;
-            background: none;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 15px;
-            flex: 1;
-            transition: all 0.3s;
-        }
-        
-        .light-theme .withdraw-toggle-btn { color: var(--text-secondary-light); } 
-        .dark-theme .withdraw-toggle-btn { color: var(--text-secondary-dark); }
-        
-        .withdraw-toggle-btn.active {
-            font-weight: 700;
-            color: var(--primary-color);
-            background-color: rgba(255, 107, 53, 0.1);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* د تبادلې معلومات */
-        .conversion-info {
-            font-size: 0.85rem;
-            text-align: center;
-            margin-bottom: 15px;
-            opacity: 0.8;
-            background: rgba(255, 107, 53, 0.1);
-            padding: 15px;
-            border-radius: 15px;
-        }
-        
-        .conversion-rate {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
         /* تایید بېج */
         .verified-badge {
             color: var(--primary-color);
@@ -1109,6 +1074,40 @@
             margin-top: 8px;
             font-size: 0.85rem;
             color: var(--success);
+        }
+        
+        /* د چینل لوګو سټایل */
+        .channel-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 8px;
+        }
+        
+        /* د ریوارډ پیغام سټایل */
+        .reward-message {
+            background: var(--gradient-rainbow);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--card-shadow);
+            animation: rewardPulse 2s infinite;
+        }
+        
+        @keyframes rewardPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .reward-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -1237,16 +1236,12 @@
                 <div class="card">
                     <div class="card-title">
                         <i class="fas fa-wallet"></i>
-                        Withdraw Funds
+                        Withdraw DOGS
                     </div>
                     
                     <!-- د ویډرا شرط ښکاره کول -->
                     <div id="withdrawal-requirement-container"></div>
                     
-                    <div class="withdraw-method-toggle">
-                        <button class="withdraw-toggle-btn active" data-method="local">Local Methods</button>
-                        <button class="withdraw-toggle-btn" data-method="usdt">USDT (Binance)</button>
-                    </div>
                     <div id="withdraw-section"></div>
                 </div>
                 
@@ -1288,21 +1283,19 @@
     document.addEventListener('DOMContentLoaded', () => {
         const tg = window.Telegram.WebApp;
         const firebaseConfig = {
-            apiKey: "AIzaSyD4UbW_Iy4kUWH3V70Q1mWCI4-_KFk6ku4",
-            authDomain: "onlinewark-a0147.firebaseapp.com",
-            databaseURL: "https://onlinewark-a0147-default-rtdb.firebaseio.com",
-            projectId: "onlinewark-a0147",
-            storageBucket: "onlinewark-a0147.appspot.com",
-            messagingSenderId: "92155538620",
-            appId: "1:92155538620:android:5e198a8eea6bf17f61f4b9"
+            apiKey: "AIzaSyDKsM37x67mkHxCBH6tB3xHFn0kIvQpxB8",
+            authDomain: "dogs-69500.firebaseapp.com",
+            projectId: "dogs-69500",
+            storageBucket: "dogs-69500.firebasestorage.app",
+            messagingSenderId: "124407587515",
+            appId: "1:124407587515:web:b2b805a559dca55dc9ff9e",
+            measurementId: "G-ZQTY8MH69Y"
         };
         
         let appConfig = {}; let userState = {}; let tgUser = {}; let earningWalletBalance = 0;
         let leaderboardData = { referral: [], earning: [] };
         let userTransactions = [];
-        let currentWithdrawMethod = 'local'; // 'local' or 'usdt'
-        const DOGS_TO_USDT_RATE = 0.01; // 1 DOGS = 0.01 USDT
-        const MIN_ADS_FOR_WITHDRAWAL = 100; // د ویډرا لپاره اړین اعلانات
+        const MIN_ADS_FOR_WITHDRAWAL = 100;
 
         const popup = document.getElementById('popup');
         const popupBody = document.getElementById('popup-body');
@@ -1454,7 +1447,7 @@
             
             if (totalAds >= MIN_ADS_FOR_WITHDRAWAL) {
                 requirementHtml = `
-                    <div class="withdrawal-requirement" style="background: var(--gradient-primary);">
+                    <div class="withdrawal-requirement" style="background: var(--gradient-rainbow);">
                         <div class="requirement-text">
                             <i class="fas fa-check-circle"></i> Withdrawal Requirement Met!
                         </div>
@@ -1554,7 +1547,18 @@
                 await db.ref(`userEarnings/${tgUser.id}/${today}`).set(firebase.database.ServerValue.increment(adValue));
 
                 tg.HapticFeedback.notificationOccurred('success');
-                tg.showAlert(`+${adValue.toFixed(2)} DOGS added to your Earning Wallet.`);
+                
+                // د ریوارډ پیغام ښکاره کول
+                showPopup(`
+                    <div class="reward-message">
+                        <i class="fas fa-trophy" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <h2>Congratulations!</h2>
+                        <p>You watched an ad and earned</p>
+                        <div class="reward-amount">+${adValue.toFixed(2)} DOGS</div>
+                        <p>Your earning wallet has been updated!</p>
+                    </div>
+                    <button class="popup-close-btn" style="margin-top: 20px;">Continue</button>
+                `);
                 
                 renderUI();
 
@@ -1597,7 +1601,7 @@
             listEl.innerHTML = userTransactions.map(item => `
                 <div class="history-item">
                     <div class="history-details">
-                        <p>${item.amount.toFixed(2)} ${item.currency || 'DOGS'} - ${item.method}</p>
+                        <p>${item.amount.toFixed(2)} DOGS - ${item.method}</p>
                         <small>${new Date(item.timestamp).toLocaleString()}</small>
                     </div>
                     <span class="history-status status-${item.status}">${item.status}</span>
@@ -1632,18 +1636,6 @@
             document.getElementById('profile-page').addEventListener('submit', (e) => handleWithdraw(e));
             document.getElementById('referral-section').addEventListener('click', (e) => { if(e.target.id === 'copy-ref-link-btn') copyReferralLink(); });
             document.getElementById('move-to-balance-btn').addEventListener('click', handleMoveToBalance);
-            
-            // د USDT ویډرا میتود ټوګل اضافه کول
-            document.querySelector('.withdraw-method-toggle').addEventListener('click', (e) => {
-                if(e.target.classList.contains('withdraw-toggle-btn')) {
-                    document.querySelectorAll('.withdraw-toggle-btn').forEach(b => {
-                        b.classList.remove('active');
-                    });
-                    e.target.classList.add('active');
-                    currentWithdrawMethod = e.target.dataset.method;
-                    renderWithdrawSection();
-                }
-            });
             
             // د تیم تoggle اضافه کول
             document.getElementById('theme-toggle').addEventListener('click', () => {
@@ -1693,7 +1685,19 @@
                         if (!userState.completedTasks) userState.completedTasks = {};
                         userState.completedTasks[taskId] = true;
                         tg.HapticFeedback.notificationOccurred('success');
-                        tg.showAlert(`Thank you! You received ${task.reward} bonus DOGS.`);
+                        
+                        // د ریوارډ پیغام ښکاره کول
+                        showPopup(`
+                            <div class="reward-message">
+                                <i class="fas fa-gift" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                                <h2>Task Completed!</h2>
+                                <p>You completed the task and earned</p>
+                                <div class="reward-amount">+${task.reward} DOGS</div>
+                                <p>Your balance has been updated!</p>
+                            </div>
+                            <button class="popup-close-btn" style="margin-top: 20px;">Continue</button>
+                        `);
+                        
                         renderUI();
                     } catch (error) { 
                         tg.showAlert('Failed to claim bonus.'); 
@@ -1727,42 +1731,25 @@
             const methodEl = document.getElementById('withdraw-method');
             const accountNumber = document.getElementById('account-number').value;
             const amount = parseFloat(document.getElementById('amount').value);
-            let selectedMethod;
-            
-            if (currentWithdrawMethod === 'local') {
-                selectedMethod = appConfig.withdrawMethods.find(m => m.name === methodEl.value);
-            } else {
-                // USDT ویډرا میتود
-                selectedMethod = {
-                    name: 'USDT (Binance)',
-                    min: 1, // د USDT لپاره لږترلږه اندازه
-                    currency: 'USDT'
-                };
-            }
+            const selectedMethod = appConfig.withdrawMethods.find(m => m.name === methodEl.value);
             
             if (isNaN(amount) || amount <= 0) { tg.showAlert("Please enter a valid amount."); return; }
             if (!selectedMethod) { tg.showAlert("Invalid withdrawal method."); return; }
             
-            // د USDT ویډرا لپاره د DOGS څخه USDT ته بدلول
-            let amountInDOGS = amount;
-            if (currentWithdrawMethod === 'usdt') {
-                amountInDOGS = amount / DOGS_TO_USDT_RATE;
-            }
-            
-            if (amountInDOGS < selectedMethod.min * (currentWithdrawMethod === 'usdt' ? 1/DOGS_TO_USDT_RATE : 1)) { 
-                tg.showAlert(`Minimum withdrawal for ${selectedMethod.name} is ${selectedMethod.min} ${selectedMethod.currency || 'DOGS'}.`); 
+            if (amount < selectedMethod.min) { 
+                tg.showAlert(`Minimum withdrawal for ${selectedMethod.name} is ${selectedMethod.min} DOGS.`); 
                 return; 
             }
-            if (amountInDOGS > userState.balance) { tg.showAlert("You don't have enough balance."); return; }
+            if (amount > userState.balance) { tg.showAlert("You don't have enough balance."); return; }
             
             const btn = document.getElementById('withdraw-submit-btn'); btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
             const db = firebase.database();
             try {
                 const userRef = db.ref(`users/${tgUser.id}`);
-                userState.balance -= amountInDOGS;
+                userState.balance -= amount;
                 renderUI(); 
                 
-                await userRef.child('balance').set(firebase.database.ServerValue.increment(-amountInDOGS));
+                await userRef.child('balance').set(firebase.database.ServerValue.increment(-amount));
                 const reqId = db.ref('withdrawals/pending').push().key;
                 
                 const newRequest = { 
@@ -1772,8 +1759,7 @@
                     method: selectedMethod.name, 
                     account: accountNumber, 
                     amount: amount,
-                    currency: currentWithdrawMethod === 'usdt' ? 'USDT' : 'DOGS',
-                    amountInDOGS: amountInDOGS,
+                    currency: 'DOGS',
                     status: 'pending', 
                     timestamp: firebase.database.ServerValue.TIMESTAMP 
                 };
@@ -1788,8 +1774,8 @@
                 // د ویډرا تایید پیغام ښکاره کول
                 showPopup(`
                     <h2>Withdrawal Request Submitted!</h2>
-                    <p>Your withdrawal request for <strong>${amount} ${currentWithdrawMethod === 'usdt' ? 'USDT' : 'DOGS'}</strong> has been submitted successfully.</p>
-                    <div class="withdrawal-requirement" style="background: var(--gradient-primary); margin: 15px 0;">
+                    <p>Your withdrawal request for <strong>${amount} DOGS</strong> has been submitted successfully.</p>
+                    <div class="withdrawal-requirement" style="background: var(--gradient-rainbow); margin: 15px 0;">
                         <i class="fas fa-clock"></i>
                         <p>Your withdrawal will be processed within <strong>24 to 72 hours</strong>.</p>
                     </div>
@@ -1798,7 +1784,7 @@
                 
                 document.getElementById('withdraw-form').reset();
             } catch (error) {
-                userState.balance += amountInDOGS;
+                userState.balance += amount;
                 tg.HapticFeedback.notificationOccurred('error'); 
                 tg.showAlert("Failed to submit request. Your balance has been restored.");
             } finally {
@@ -1864,10 +1850,10 @@
                     const isCompleted = userState.completedTasks && userState.completedTasks[task.key];
                     const el = document.createElement('div'); el.className = 'task-container';
                     
-                    // د چینل نوم سره تایید بېج اضافه کول
+                    // د چینل لوګو سره ښکاره کول
                     const taskInfo = `
                         <div class="task-icon-img">
-                            <i class="${task.icon || 'fas fa-tasks'}"></i>
+                            <img src="${task.icon || 'https://via.placeholder.com/50'}" alt="Channel Logo" class="channel-logo">
                         </div>
                         <div class="task-info">
                             <h3>${task.name}</h3>
@@ -1916,87 +1902,40 @@
             const container = document.getElementById('withdraw-section'); 
             let optionsHtml = '';
             
-            if (currentWithdrawMethod === 'local') {
-                if (appConfig.withdrawMethods) { 
-                    appConfig.withdrawMethods.forEach(method => { 
-                        optionsHtml += `<option value="${method.name}">${method.name} (Min: ${method.min} DOGS)</option>`; 
-                    }); 
-                }
-                
-                const minRefs = appConfig.minimumWithdrawReferrals || 0;
-                let referralNotice = '';
-                if (minRefs > 0) {
-                    referralNotice = `<p style="font-size: 0.85rem; text-align: center; margin-bottom: 15px; opacity: 0.8;"><b>Note:</b> You need at least <b>${minRefs} referrals</b> to be eligible for withdrawal.</p>`;
-                }
-
-                container.innerHTML = `
-                    <form id="withdraw-form" class="task-container" style="flex-direction: column; align-items: stretch;">
-                        <h3>Request Withdraw (Local)</h3>
-                        ${referralNotice}
-                        <div class="form-group" style="width:100%">
-                            <label for="withdraw-method">Method:</label>
-                            <select id="withdraw-method" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">${optionsHtml}</select>
-                        </div>
-                        <div class="form-group" style="width:100%">
-                            <label for="account-number">Account Number/ID:</label>
-                            <input type="text" id="account-number" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">
-                        </div>
-                        <div class="form-group" style="width:100%">
-                            <label for="amount">Amount (DOGS):</label>
-                            <input type="number" step="any" id="amount" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">
-                        </div>
-                        <button type="submit" id="withdraw-submit-btn" class="action-btn">
-                            <i class="fas fa-paper-plane"></i>
-                            Submit Request
-                        </button>
-                    </form>
-                `;
-            } else {
-                // USDT ویډرا فورم
-                const usdtBalance = (userState.balance || 0) * DOGS_TO_USDT_RATE;
-                const minRefs = appConfig.minimumWithdrawReferrals || 0;
-                let referralNotice = '';
-                if (minRefs > 0) {
-                    referralNotice = `<p style="font-size: 0.85rem; text-align: center; margin-bottom: 15px; opacity: 0.8;"><b>Note:</b> You need at least <b>${minRefs} referrals</b> to be eligible for withdrawal.</p>`;
-                }
-                
-                container.innerHTML = `
-                    <form id="withdraw-form" class="task-container" style="flex-direction: column; align-items: stretch;">
-                        <h3>Request Withdraw (USDT)</h3>
-                        ${referralNotice}
-                        <div class="conversion-info">
-                            <p>Conversion Rate: <span class="conversion-rate">1 DOGS = ${DOGS_TO_USDT_RATE} USDT</span></p>
-                            <p>Your Available USDT: <span class="conversion-rate">${usdtBalance.toFixed(4)} USDT</span></p>
-                        </div>
-                        <div class="form-group" style="width:100%">
-                            <label for="account-number">Binance Pay ID:</label>
-                            <input type="text" id="account-number" required style="width: 100%; padding: 12px 20px; border-radius: 50px;" placeholder="Enter your Binance Pay ID">
-                        </div>
-                        <div class="form-group" style="width:100%">
-                            <label for="amount">Amount (USDT):</label>
-                            <input type="number" step="0.01" min="1" id="amount" required style="width: 100%; padding: 12px 20px; border-radius: 50px;" placeholder="Minimum 1 USDT">
-                        </div>
-                        <div class="form-group" style="width:100%">
-                            <p style="font-size: 0.85rem; text-align: center; margin-bottom: 15px; opacity: 0.8;">
-                                Equivalent DOGS: <span id="equivalent-dogs">0.00</span> DOGS
-                            </p>
-                        </div>
-                        <button type="submit" id="withdraw-submit-btn" class="action-btn" style="background: var(--gradient-primary);">
-                            <i class="fas fa-paper-plane"></i>
-                            Submit Request
-                        </button>
-                    </form>
-                `;
-                
-                // د USDT مقدار بدلیدو سره د DOGS معادل محاسبه کول
-                const amountInput = document.getElementById('amount');
-                const equivalentDogs = document.getElementById('equivalent-dogs');
-                
-                amountInput.addEventListener('input', () => {
-                    const usdtAmount = parseFloat(amountInput.value) || 0;
-                    equivalentDogs.textContent = (usdtAmount / DOGS_TO_USDT_RATE).toFixed(2);
-                });
+            if (appConfig.withdrawMethods) { 
+                appConfig.withdrawMethods.forEach(method => { 
+                    optionsHtml += `<option value="${method.name}">${method.name} (Min: ${method.min} DOGS)</option>`; 
+                }); 
             }
+            
+            const minRefs = appConfig.minimumWithdrawReferrals || 0;
+            let referralNotice = '';
+            if (minRefs > 0) {
+                referralNotice = `<p style="font-size: 0.85rem; text-align: center; margin-bottom: 15px; opacity: 0.8;"><b>Note:</b> You need at least <b>${minRefs} referrals</b> to be eligible for withdrawal.</p>`;
+            }
+
+            container.innerHTML = `
+                <form id="withdraw-form" class="task-container" style="flex-direction: column; align-items: stretch;">
+                    <h3>Request Withdraw</h3>
+                    ${referralNotice}
+                    <div class="form-group" style="width:100%">
+                        <label for="withdraw-method">Method:</label>
+                        <select id="withdraw-method" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">${optionsHtml}</select>
+                    </div>
+                    <div class="form-group" style="width:100%">
+                        <label for="account-number">Account Number/ID:</label>
+                        <input type="text" id="account-number" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">
+                    </div>
+                    <div class="form-group" style="width:100%">
+                        <label for="amount">Amount (DOGS):</label>
+                        <input type="number" step="any" id="amount" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">
+                    </div>
+                    <button type="submit" id="withdraw-submit-btn" class="action-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Request
+                    </button>
+                </form>
+            `;
         };
 
         const renderDynamicLinks = () => {
@@ -2009,7 +1948,7 @@
                     const el = document.createElement('div'); el.className = 'task-container';
                     el.innerHTML = `
                         <div class="task-icon-img">
-                            <i class="${link.icon || 'fas fa-link'}"></i>
+                            <img src="${link.icon || 'https://via.placeholder.com/50'}" alt="Link Logo" class="channel-logo">
                         </div>
                         <div class="task-info">
                             <h3>${link.name}</h3>
