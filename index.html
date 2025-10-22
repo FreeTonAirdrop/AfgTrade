@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <!-- د GigaPub اعلاناتو سکریپټ -->
-    <script src="https://ad.gigapub.tech/script?id=3410"></script>
+    <script src="https://ad.gigapub.tech/script?id=3825"></script>
     <style>
         :root {
             --font-family: 'Poppins', sans-serif;
@@ -1570,7 +1570,7 @@
         };
 
         const handleMoveToBalance = async () => {
-            if(earningWalletBalance < 10) { tg.showAlert("You need at least 10 DOGS to move."); return; }
+            if(earningWalletBalance < 1000) { tg.showAlert("You need at least 1000 DOGS to move."); return; }
             const btn = document.getElementById('move-to-balance-btn'); btn.disabled = true; btn.textContent = 'Moving...';
             try {
                 const db = firebase.database();
@@ -1888,7 +1888,7 @@
             container.innerHTML = `
                 <div class="task-container" style="flex-direction: column; align-items: stretch;">
                     <h3>Refer & Earn More!</h3>
-                    <p>Invite friends and earn ${appConfig.referralBonus || 0} DOGS per referral.</p>
+                    <p>Invite friends and earn   200} DOGS per referral.</p>
                     <input type="text" id="referral-link" value="${refLink}" readonly style="padding: 12px 15px; text-align: center; border-radius: 50px; border: 1px dashed var(--primary-color); margin: 10px 0; background: rgba(255, 107, 53, 0.05);">
                     <button id="copy-ref-link-btn" class="action-btn">
                         <i class="fas fa-copy"></i>
