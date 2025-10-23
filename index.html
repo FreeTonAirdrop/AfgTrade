@@ -11,348 +11,44 @@
     <!-- د GigaPub اعلاناتو سکریپټ -->
     <script src="https://ad.gigapub.tech/script?id=3825"></script>
     <style>
-        :root {
-            --font-family: 'Poppins', sans-serif;
-            --primary-color: #FF6B35;
-            --secondary-color: #FF9F1C;
-            --accent-color: #FFB347;
-            --background-light: #F8F9FA;
-            --surface-light: #FFFFFF;
-            --text-primary-light: #2C3E50;
-            --text-secondary-light: #7E8C9A;
-            --border-light: #E8E8E8;
-            --background-dark: #121212;
-            --surface-dark: #1E1E1E;
-            --text-primary-dark: #F5F5F5;
-            --text-secondary-dark: #B0B0B0;
-            --border-dark: #333333;
-            --success: #2ECC71;
-            --danger: #E74C3C;
-            --pending: #F39C12;
-            --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            --card-shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.15);
-            --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #FF9F1C 100%);
-            --gradient-secondary: linear-gradient(135deg, #FF9F1C 0%, #FFB347 100%);
-            --gradient-rainbow: linear-gradient(135deg, #FF6B35, #FF9F1C, #FFB347, #FFD166, #06D6A0, #118AB2, #073B4C);
+        /* د پخواني سټایلونو ساتل... */
+        
+        /* نوې برخې لپاره اضافي سټایلونه */
+        .referral-page, .history-page, .withdraw-page {
+            display: none;
+            padding: 15px;
+            animation: fadeIn 0.4s ease-in-out;
         }
         
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        .referral-page.active, .history-page.active, .withdraw-page.active {
+            display: block;
         }
         
-        body { 
-            font-family: var(--font-family); 
-            transition: background-color 0.3s, color 0.3s; 
-            -webkit-font-smoothing: antialiased;
-            background: var(--background-light);
-            overflow-x: hidden;
-        }
-        
-        body.light-theme { 
-            background-color: var(--background-light); 
-            color: var(--text-primary-light); 
-        }
-        
-        body.dark-theme { 
-            background-color: var(--background-dark); 
-            color: var(--text-primary-dark); 
-        }
-        
-        #app { 
-            max-width: 500px; 
-            margin: 0 auto; 
-            padding-bottom: 80px;
-            min-height: 100vh;
-        }
-        
-        .page { 
-            display: none; 
-            padding: 15px; 
-        }
-        
-        .page.active { 
-            display: block; 
-            animation: fadeIn 0.4s ease-in-out; 
-        }
-        
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(15px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        
-        /* لوډینګ اسکرین */
-        #app-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
+        /* د نويي بار لپاره اضافي بټنونه */
+        .nav-btn.referral-btn, .nav-btn.history-btn, .nav-btn.withdraw-btn {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: var(--gradient-rainbow);
-            color: white;
         }
         
-        .loader-container {
-            text-align: center;
-            padding: 30px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 80%;
-        }
-        
-        .loader-logo {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s infinite;
-        }
-        
-        .loader-logo i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .loader-spinner {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        #loading-progress {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .loader-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .loader-subtext {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        /* هدر ډیزاین */
-        .app-header {
-            background: var(--gradient-rainbow);
-            color: white;
-            padding: 25px 20px;
-            border-radius: 0 0 30px 30px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .app-header:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
-        }
-        
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .app-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .app-logo {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .app-logo i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-        
-        .theme-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-        
-        .profile-card {
-            display: flex;
-            align-items: center;
+        /* د ریفریل کارډ ډیزاین */
+        .referral-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
-            position: relative;
-            z-index: 1;
+            margin: 20px 0;
         }
         
-        #user-photo { 
-            width: 70px; 
-            height: 70px; 
-            border-radius: 50%; 
-            border: 3px solid rgba(255, 255, 255, 0.5); 
-            object-fit: cover; 
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .user-info {
-            flex-grow: 1;
-        }
-        
-        #user-name { 
-            font-size: 1.2rem; 
-            font-weight: 600; 
-            margin-bottom: 5px; 
-        }
-        
-        #user-balance-container { 
-            font-size: 0.9rem; 
-            opacity: 0.9;
-        }
-        
-        #user-balance { 
-            font-size: 1.1rem; 
-            font-weight: 700; 
-        }
-
-        /* دایروی کارډ ډیزاین */
-        .card {
-            background-color: var(--surface-light);
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card:before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .referral-stat-card {
             background: var(--gradient-rainbow);
-            opacity: 0.1;
-        }
-        
-        .dark-theme .card {
-            background-color: var(--surface-dark);
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
-        }
-        
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .card-title i {
-            color: var(--primary-color);
-            background: rgba(255, 107, 53, 0.1);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* دایروی سټیټس کارډونه */
-        .stats-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 15px; 
-            margin: 20px 0; 
-        }
-        
-        .stat-card { 
-            padding: 20px; 
-            border-radius: 20px; 
-            text-align: center; 
             color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
             box-shadow: var(--card-shadow);
-            transition: transform 0.3s;
             position: relative;
             overflow: hidden;
         }
         
-        .stat-card:nth-child(1) { background: linear-gradient(135deg, #FF6B35 0%, #FF9F1C 100%); }
-        .stat-card:nth-child(2) { background: linear-gradient(135deg, #FF9F1C 0%, #FFB347 100%); }
-        .stat-card:nth-child(3) { background: linear-gradient(135deg, #FFB347 0%, #FFD166 100%); }
-        .stat-card:nth-child(4) { background: linear-gradient(135deg, #06D6A0 0%, #118AB2 100%); }
-        
-        .stat-card:before {
+        .referral-stat-card:before {
             content: '';
             position: absolute;
             top: -20px;
@@ -363,751 +59,144 @@
             background: rgba(255, 255, 255, 0.1);
         }
         
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .stat-card h3 { 
-            font-size: 0.85rem; 
-            font-weight: 500; 
-            margin-bottom: 8px; 
-            text-transform: uppercase; 
+        .referral-stat-card h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
             opacity: 0.9;
         }
         
-        .stat-card p { 
-            font-size: 1.4rem; 
-            font-weight: 700; 
-        }
-        
-        /* دایروی چارټ */
-        .chart-container { 
-            padding: 20px; 
-            border-radius: 25px; 
-            margin-top: 20px; 
-            background-color: var(--surface-light);
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .chart-container:before {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--gradient-rainbow);
-            opacity: 0.05;
-        }
-        
-        .dark-theme .chart-container { 
-            background-color: var(--surface-dark); 
-        }
-        
-        .chart { 
-            display: flex; 
-            justify-content: space-around; 
-            align-items: flex-end; 
-            height: 150px; 
-            padding-top: 10px; 
-            margin-bottom: 10px;
-            position: relative;
-        }
-        
-        .bar { 
-            width: 12%; 
-            background: var(--gradient-rainbow); 
-            border-radius: 10px 10px 0 0; 
-            position: relative; 
-            cursor: pointer; 
-            transition: transform 0.2s;
-        }
-        
-        .bar:hover {
-            transform: scaleY(1.05);
-        }
-        
-        .bar .tooltip { 
-            position: absolute; 
-            top: -30px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            background: var(--primary-color); 
-            color: white; 
-            padding: 5px 10px; 
-            border-radius: 10px; 
-            font-size: 0.8rem; 
-            white-space: nowrap; 
-            opacity: 0; 
-            transition: opacity 0.2s; 
-            pointer-events: none; 
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .bar:hover .tooltip { opacity: 1; }
-        
-        .chart-labels { 
-            display: flex; 
-            justify-content: space-around; 
-            font-size: 0.75rem; 
-            margin-top: 5px; 
-        }
-        
-        /* دایروی بټنونه */
-        .action-btn { 
-            padding: 12px 25px; 
-            font-size: 0.9rem; 
-            font-weight: 600; 
-            color: #fff; 
-            border: none; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            background: var(--gradient-rainbow);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .action-btn:before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
-        }
-        
-        .action-btn:disabled { 
-            background: #808B96; 
-            cursor: not-allowed; 
-            transform: none;
-            box-shadow: none;
-        }
-        
-        /* دایروی ټاسک کارډونه */
-        .task-container { 
-            padding: 20px; 
-            border-radius: 20px; 
-            margin-bottom: 15px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            background-color: var(--surface-light);
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .task-container:before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--gradient-rainbow);
-            opacity: 0.1;
-        }
-        
-        .dark-theme .task-container { 
-            background-color: var(--surface-dark); 
-        }
-        
-        .task-container:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
-        }
-        
-        .task-icon-img { 
-            width: 50px; 
-            height: 50px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            background: var(--gradient-rainbow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-        
-        .task-info h3 { 
-            font-size: 1.1rem; 
-            font-weight: 600; 
-            margin-bottom: 5px;
-        } 
-        
-        .task-info p { 
-            font-size: 0.85rem; 
-            opacity: 0.8;
-        }
-        
-        /* دایروی والیټ کارډونه */
-        .wallet-card {
-            background: var(--gradient-rainbow);
-            color: white;
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .wallet-card:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
-        }
-        
-        .wallet-title {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-        
-        .wallet-balance {
-            font-size: 2.2rem;
+        .referral-stat-card p {
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
         }
         
-        /* دایروی ریفرل کارډ */
-        .referral-card {
-            background: var(--gradient-rainbow);
-            color: white;
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
+        /* د ریفریل لیست ډیزاین */
+        .referral-list {
+            list-style: none;
+            margin-top: 20px;
         }
         
-        .referral-card:before {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            left: -30px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* دایروی نويي بار */
-        .bottom-nav { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            max-width: 500px; 
-            margin: 0 auto; 
-            display: flex; 
-            justify-content: space-around; 
-            padding: 15px 0; 
-            z-index: 1000; 
+        .referral-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 20px;
             background-color: var(--surface-light);
-            border-radius: 30px 30px 0 0;
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
         }
         
-        .dark-theme .bottom-nav { 
-            background-color: var(--surface-dark); 
+        .dark-theme .referral-item {
+            background-color: var(--surface-dark);
         }
         
-        .nav-btn { 
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            font-family: var(--font-family); 
-            font-size: 0.75rem; 
-            transition: all 0.3s; 
-            flex-grow: 1; 
-            padding: 8px;
-            border-radius: 15px;
-            position: relative;
+        .referral-item:hover {
+            transform: translateX(5px);
         }
         
-        .light-theme .nav-btn { color: var(--text-secondary-light); } 
-        .dark-theme .nav-btn { color: var(--text-secondary-dark); }
-        
-        .nav-btn i { 
-            font-size: 1.5rem; 
-            margin-bottom: 5px; 
-            transition: all 0.3s;
-            background: rgba(255, 107, 53, 0.1);
+        .referral-item img {
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        } 
-        
-        .nav-btn.active { 
-            color: var(--primary-color); 
+            margin-right: 15px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .nav-btn.active i {
-            background: var(--gradient-rainbow);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-        
-        /* دایروی پاپ اپ */
-        .popup-overlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.6); 
-            display: none; 
-            justify-content: center; 
-            align-items: center; 
-            z-index: 10000; 
-            backdrop-filter: blur(5px);
-        }
-        
-        .popup-content { 
-            padding: 30px; 
-            border-radius: 25px; 
-            text-align: center; 
-            max-width: 80%; 
-            background-color: var(--surface-light);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .popup-content:before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--gradient-rainbow);
-            opacity: 0.1;
-        }
-        
-        .dark-theme .popup-content { background-color: var(--surface-dark); }
-        
-        .popup-content h2 { 
-            margin-bottom: 15px; 
-            color: var(--primary-color); 
-        }
-        
-        .popup-content p { 
-            margin-bottom: 20px; 
-        }
-        
-        .popup-close-btn { 
-            padding: 12px 30px; 
-            border: none; 
-            border-radius: 50px; 
-            color: #fff; 
-            background: var(--gradient-rainbow);
-            cursor: pointer; 
+        .referral-name {
             font-weight: 600;
-            transition: transform 0.2s;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            flex-grow: 1;
         }
         
-        .popup-close-btn:hover {
-            transform: scale(1.05);
+        .referral-date {
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
         
-        .popup-loader .spinner { 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 50%; 
-            border: 4px solid; 
-            border-color: var(--primary-color) transparent; 
-            animation: spin 1s linear infinite; 
-            margin: 0 auto 15px;
-        }
-        
-        /* دایروی لیډر بورډ */
-        .leaderboard-toggle { 
-            display: flex; 
-            justify-content: space-around; 
-            margin-bottom: 15px; 
+        /* د هستوري ډیزاین */
+        .history-filters {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
             background-color: var(--surface-light);
             border-radius: 20px;
             padding: 5px;
             box-shadow: var(--card-shadow);
         }
         
-        .dark-theme .leaderboard-toggle {
+        .dark-theme .history-filters {
             background-color: var(--surface-dark);
         }
         
-        .toggle-btn { 
-            padding: 12px 20px; 
-            border: none; 
-            background: none; 
-            font-size: 1rem; 
-            cursor: pointer; 
+        .filter-btn {
+            padding: 12px 20px;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            cursor: pointer;
             border-radius: 15px;
             flex: 1;
             transition: all 0.3s;
         }
         
-        .light-theme .toggle-btn { color: var(--text-secondary-light); } 
-        .dark-theme .toggle-btn { color: var(--text-secondary-dark); }
+        .light-theme .filter-btn { color: var(--text-secondary-light); } 
+        .dark-theme .filter-btn { color: var(--text-secondary-dark); }
         
-        .toggle-btn.active { 
-            font-weight: 700; 
-            color: var(--primary-color); 
+        .filter-btn.active {
+            font-weight: 700;
+            color: var(--primary-color);
             background-color: rgba(255, 107, 53, 0.1);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .leaderboard-list { list-style: none; }
+        /* د ویډرا برخې ډیزاین */
+        .withdraw-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
         
-        .leaderboard-item { 
-            display: flex; 
-            align-items: center; 
-            padding: 15px; 
-            margin-bottom: 10px; 
-            border-radius: 20px; 
+        .method-card {
             background-color: var(--surface-light);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
             box-shadow: var(--card-shadow);
             transition: transform 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
         }
         
-        .dark-theme .leaderboard-item { 
-            background-color: var(--surface-dark); 
-        }
-        
-        .leaderboard-item:hover {
-            transform: translateX(5px);
-        }
-        
-        .rank { 
-            font-size: 1.2rem; 
-            font-weight: 700; 
-            color: var(--primary-color); 
-            width: 40px; 
-            background: rgba(255, 107, 53, 0.1);
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .leaderboard-item img { 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 50%; 
-            margin-right: 15px; 
-            object-fit: cover; 
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .leaderboard-name { 
-            font-weight: 600; 
-            flex-grow: 1; 
-        } 
-        
-        .leaderboard-score { 
-            font-weight: 600; 
-            color: var(--primary-color); 
-            background: rgba(255, 107, 53, 0.1);
-            padding: 8px 15px;
-            border-radius: 20px;
-        }
-        
-        /* دایروی سکشن سرلیک */
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 25px 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title:after {
-            content: '';
-            flex-grow: 1;
-            height: 3px;
-            background: var(--gradient-rainbow);
-            border-radius: 3px;
-        }
-        
-        /* دایروی فارم عناصر */
-        form input, form select, form textarea { 
-            transition: all 0.2s ease-in-out; 
-            border: 1px solid; 
-            width: 100%;
-            padding: 15px 20px;
-            border-radius: 50px;
-            font-family: var(--font-family);
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-        
-        .light-theme form input, .light-theme form select { 
-            background-color: var(--surface-light);
-            border-color: var(--border-light); 
-            color: var(--text-primary-light);
-        }
-        
-        .dark-theme form input, .dark-theme form select { 
+        .dark-theme .method-card {
             background-color: var(--surface-dark);
-            border-color: var(--border-dark); 
-            color: var(--text-primary-dark);
         }
         
-        form input:focus, form select:focus, form textarea:focus { 
-            outline: none; 
-            border-color: var(--primary-color) !important; 
-            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2); 
+        .method-card:hover {
+            transform: translateY(-5px);
         }
         
-        .form-group {
-            margin-bottom: 15px;
+        .method-card.active {
+            border-color: var(--primary-color);
+            background-color: rgba(255, 107, 53, 0.05);
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        /* دایروی تاریخي آیټمونه */
-        .history-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px; 
-            border-radius: 20px; 
-            margin-bottom: 10px; 
-            background-color: var(--surface-light);
-            box-shadow: var(--card-shadow);
-            transition: transform 0.2s;
-        }
-        
-        .dark-theme .history-item { 
-            background-color: var(--surface-dark); 
-        }
-        
-        .history-item:hover {
-            transform: translateX(5px);
-        }
-        
-        .history-details p { margin: 0; } 
-        .history-details p:first-child { font-weight: 600; }
-        
-        .history-status { 
-            padding: 8px 15px; 
-            border-radius: 50px; 
-            font-size: 0.8rem; 
-            font-weight: 600; 
-            color: white; 
-            text-transform: capitalize; 
-        }
-        
-        .status-completed { background-color: var(--success); } 
-        .status-pending { background-color: var(--pending); } 
-        .status-rejected { background-color: var(--danger); }
-        
-        /* دایروی پرمختګ بار */
-        .progress-container { margin-bottom: 20px; }
-        
-        .progress-info { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 10px; 
-            font-size: 0.9rem; 
-            font-weight: 500; 
-        }
-        
-        .progress-bar-bg { 
-            width: 100%; 
-            height: 12px; 
-            border-radius: 10px; 
-            overflow: hidden;
-            background: rgba(255, 107, 53, 0.1);
-        }
-        
-        .progress-bar-fg { 
-            height: 100%; 
-            border-radius: 10px; 
-            background: var(--gradient-rainbow); 
-            transition: width 0.3s ease; 
-        }
-        
-        /* خالي حالت */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-secondary-light);
-        }
-        
-        .dark-theme .empty-state {
-            color: var(--text-secondary-dark);
-        }
-        
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            opacity: 0.5;
-            background: rgba(255, 107, 53, 0.1);
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-        
-        /* د ویډرا شرط ښکاره کول */
-        .withdrawal-requirement {
-            background: var(--gradient-rainbow);
-            color: white;
-            padding: 20px;
-            border-radius: 20px;
-            margin: 15px 0;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .withdrawal-requirement:before {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .requirement-progress {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-        
-        .requirement-text {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .requirement-bar {
-            width: 100%;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 0 10px;
-        }
-        
-        .requirement-fill {
-            height: 100%;
-            background: white;
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-        
-        .requirement-count {
-            font-size: 0.9rem;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-        
-        /* تایید بېج */
-        .verified-badge {
-            color: var(--primary-color);
-            margin-left: 5px;
-            font-size: 0.8rem;
-        }
-        
-        /* چینل تایید */
-        .channel-verified {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            color: var(--success);
-        }
-        
-        /* د چینل لوګو سټایل */
-        .channel-logo {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 8px;
-        }
-        
-        /* د ریوارډ پیغام سټایل */
-        .reward-message {
-            background: var(--gradient-rainbow);
-            color: white;
-            padding: 20px;
-            border-radius: 20px;
-            margin: 15px 0;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: var(--card-shadow);
-            animation: rewardPulse 2s infinite;
-        }
-        
-        @keyframes rewardPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-        
-        .reward-amount {
+        .method-icon {
             font-size: 2rem;
-            font-weight: 700;
-            margin: 10px 0;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .method-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .method-min {
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -1210,6 +299,65 @@
                 <div id="dynamic-tasks-container"></div>
             </div>
             
+            <div id="referral-page" class="referral-page">
+                <div class="referral-card">
+                    <h3>Invite Friends & Earn</h3>
+                    <p>Share your referral link and earn <strong>200 DOGS</strong> for each friend who joins!</p>
+                    <div id="referral-section" style="margin-top: 15px;"></div>
+                </div>
+                
+                <div class="referral-stats">
+                    <div class="referral-stat-card">
+                        <h3>Total Referrals</h3>
+                        <p id="referral-total">0</p>
+                    </div>
+                    <div class="referral-stat-card">
+                        <h3>Referral Earnings</h3>
+                        <p id="referral-earnings">0.00</p>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Your Referrals</h2>
+                <ul class="referral-list" id="referral-list"></ul>
+            </div>
+            
+            <div id="history-page" class="history-page">
+                <h2 class="section-title">Transaction History</h2>
+                
+                <div class="history-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="earnings">Earnings</button>
+                    <button class="filter-btn" data-filter="withdrawals">Withdrawals</button>
+                </div>
+                
+                <div id="history-list"></div>
+            </div>
+            
+            <div id="withdraw-page" class="withdraw-page">
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fas fa-wallet"></i>
+                        Withdraw DOGS
+                    </div>
+                    
+                    <!-- د ویډرا شرط ښکاره کول -->
+                    <div id="withdrawal-requirement-container"></div>
+                    
+                    <h3 style="margin: 20px 0 15px;">Select Withdrawal Method</h3>
+                    <div class="withdraw-methods" id="withdraw-methods-container"></div>
+                    
+                    <div id="withdraw-form-container"></div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fas fa-history"></i>
+                        Withdrawal History
+                    </div>
+                    <div id="withdrawal-history-list"></div>
+                </div>
+            </div>
+            
             <div id="leaderboard-page" class="page">
                 <h2 class="section-title">Leaderboards</h2>
                 
@@ -1225,34 +373,6 @@
                     <ul class="leaderboard-list" id="earning-leaderboard-list"></ul>
                 </div>
             </div>
-            
-            <div id="profile-page" class="page">
-                <div class="referral-card">
-                    <h3>Invite Friends & Earn</h3>
-                    <p>Share your referral link and earn <strong>${200DOGS</strong> for each friend who joins!</p>
-                    <div id="referral-section" style="margin-top: 15px;"></div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-wallet"></i>
-                        Withdraw DOGS
-                    </div>
-                    
-                    <!-- د ویډرا شرط ښکاره کول -->
-                    <div id="withdrawal-requirement-container"></div>
-                    
-                    <div id="withdraw-section"></div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-history"></i>
-                        Withdrawal History
-                    </div>
-                    <div id="withdrawal-history-list"></div>
-                </div>
-            </div>
         </main>
         
         <nav class="bottom-nav">
@@ -1264,13 +384,17 @@
                 <i class="fas fa-tasks"></i>
                 <span>Tasks</span>
             </button>
-            <button class="nav-btn" data-page="leaderboard-page">
-                <i class="fas fa-trophy"></i>
-                <span>Leaderboard</span>
+            <button class="nav-btn" data-page="referral-page">
+                <i class="fas fa-user-friends"></i>
+                <span>Referrals</span>
             </button>
-            <button class="nav-btn" data-page="profile-page">
-                <i class="fas fa-user-alt"></i>
-                <span>Profile</span>
+            <button class="nav-btn" data-page="history-page">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </button>
+            <button class="nav-btn" data-page="withdraw-page">
+                <i class="fas fa-wallet"></i>
+                <span>Withdraw</span>
             </button>
         </nav>
     </div>
@@ -1295,6 +419,8 @@
         let appConfig = {}; let userState = {}; let tgUser = {}; let earningWalletBalance = 0;
         let leaderboardData = { referral: [], earning: [] };
         let userTransactions = [];
+        let userReferrals = [];
+        let transactionHistory = [];
         const MIN_ADS_FOR_WITHDRAWAL = 100;
 
         const popup = document.getElementById('popup');
@@ -1325,8 +451,9 @@
                 const referralBoardPromise = db.ref('users').orderByChild('referrals').limitToLast(10).once('value');
                 const earningBoardPromise = db.ref('users').orderByChild('totalEarned').limitToLast(10).once('value');
                 const historyPromise = loadTransactionHistory(db);
+                const referralsPromise = loadUserReferrals(db);
 
-                const [referralBoardSnap, earningBoardSnap] = await Promise.all([referralBoardPromise, earningBoardPromise, historyPromise]);
+                const [referralBoardSnap, earningBoardSnap] = await Promise.all([referralBoardPromise, earningBoardPromise, historyPromise, referralsPromise]);
                 updateProgress(80);
 
                 referralBoardSnap.forEach(child => { leaderboardData.referral.push(child.val()); });
@@ -1406,11 +533,75 @@
         
         const loadTransactionHistory = async (db) => {
             userTransactions = [];
+            transactionHistory = [];
             const statuses = ['pending', 'completed', 'rejected'];
             const historyPromises = statuses.map(status => db.ref(`withdrawals/${status}`).orderByChild('userId').equalTo(tgUser.id).once('value'));
             const snapshots = await Promise.all(historyPromises);
-            snapshots.forEach(snap => { snap.forEach(childSnap => { userTransactions.push(childSnap.val()); }); });
+            snapshots.forEach(snap => { snap.forEach(childSnap => { 
+                const transaction = childSnap.val();
+                userTransactions.push(transaction);
+                transactionHistory.push({
+                    type: 'withdrawal',
+                    amount: transaction.amount,
+                    status: transaction.status,
+                    method: transaction.method,
+                    timestamp: transaction.timestamp,
+                    details: `${transaction.method} withdrawal`
+                });
+            }); });
+            
+            // د عاید تاریخ اضافه کول
+            const earningsRef = db.ref(`userEarnings/${tgUser.id}`);
+            const earningsSnapshot = await earningsRef.once('value');
+            earningsSnapshot.forEach(childSnap => {
+                const date = childSnap.key;
+                const amount = childSnap.val();
+                if (amount > 0) {
+                    transactionHistory.push({
+                        type: 'earning',
+                        amount: amount,
+                        status: 'completed',
+                        method: 'Ad Reward',
+                        timestamp: new Date(date).getTime(),
+                        details: `Earnings from ${date}`
+                    });
+                }
+            });
+            
+            // د ریفریل عاید اضافه کول
+            if (userState.referrals > 0) {
+                const referralEarnings = (userState.referrals || 0) * (appConfig.referralBonus || 0);
+                if (referralEarnings > 0) {
+                    transactionHistory.push({
+                        type: 'referral',
+                        amount: referralEarnings,
+                        status: 'completed',
+                        method: 'Referral Bonus',
+                        timestamp: Date.now(),
+                        details: `Referral earnings from ${userState.referrals} referrals`
+                    });
+                }
+            }
+            
             userTransactions.sort((a, b) => b.timestamp - a.timestamp);
+            transactionHistory.sort((a, b) => b.timestamp - a.timestamp);
+        };
+        
+        const loadUserReferrals = async (db) => {
+            userReferrals = [];
+            const referralsRef = db.ref('users').orderByChild('referredBy').equalTo(tgUser.id.toString());
+            const snapshot = await referralsRef.once('value');
+            snapshot.forEach(childSnap => {
+                const referral = childSnap.val();
+                userReferrals.push({
+                    id: referral.id,
+                    firstName: referral.firstName,
+                    lastName: referral.lastName,
+                    username: referral.username,
+                    photoUrl: referral.photoUrl,
+                    joinedDate: referral.joinedDate || Date.now()
+                });
+            });
         };
         
         const renderUI = () => {
@@ -1435,6 +626,15 @@
             
             // د ویډرا شرط ښکاره کول
             renderWithdrawalRequirement();
+            
+            // د ریفریل پاڼې معلومات ښکاره کول
+            renderReferralPage();
+            
+            // د هستوري پاڼې معلومات ښکاره کول
+            renderHistoryPage();
+            
+            // د ویډرا پاڼې معلومات ښکاره کول
+            renderWithdrawPage();
         };
         
         const renderWithdrawalRequirement = () => {
@@ -1609,7 +809,9 @@
         };
         
         const setupNavigation = () => {
-            const navButtons = document.querySelectorAll('.nav-btn'); const pages = document.querySelectorAll('.page');
+            const navButtons = document.querySelectorAll('.nav-btn'); 
+            const pages = document.querySelectorAll('.page, .referral-page, .history-page, .withdraw-page');
+            
             navButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const pageId = button.dataset.page;
@@ -1617,8 +819,16 @@
                     document.getElementById(pageId).classList.add('active');
                     navButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    if (pageId === 'profile-page') { renderWithdrawalHistory(); }
-                    if (pageId === 'leaderboard-page') { renderLeaderboard(); }
+                    
+                    if (pageId === 'referral-page') { 
+                        renderReferralPage(); 
+                    } else if (pageId === 'history-page') { 
+                        renderHistoryPage(); 
+                    } else if (pageId === 'withdraw-page') { 
+                        renderWithdrawPage(); 
+                    } else if (pageId === 'leaderboard-page') { 
+                        renderLeaderboard(); 
+                    }
                 });
             });
         };
@@ -1633,7 +843,7 @@
                 }
             });
             document.getElementById('dynamic-tasks-container').addEventListener('click', (e) => handleClaimTask(e));
-            document.getElementById('profile-page').addEventListener('submit', (e) => handleWithdraw(e));
+            document.getElementById('withdraw-page').addEventListener('submit', (e) => handleWithdraw(e));
             document.getElementById('referral-section').addEventListener('click', (e) => { if(e.target.id === 'copy-ref-link-btn') copyReferralLink(); });
             document.getElementById('move-to-balance-btn').addEventListener('click', handleMoveToBalance);
             
@@ -1647,6 +857,25 @@
                     document.body.classList.remove('dark-theme');
                     document.body.classList.add('light-theme');
                     document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // د هستوري فیلټرونو لپاره ایونټ لیسنر اضافه کول
+            document.querySelector('.history-filters').addEventListener('click', (e) => {
+                if(e.target.classList.contains('filter-btn')) {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderHistoryPage(e.target.dataset.filter);
+                }
+            });
+            
+            // د ویډرا میتودونو لپاره ایونټ لیسنر اضافه کول
+            document.getElementById('withdraw-methods-container').addEventListener('click', (e) => {
+                if(e.target.closest('.method-card')) {
+                    const methodCard = e.target.closest('.method-card');
+                    document.querySelectorAll('.method-card').forEach(card => card.classList.remove('active'));
+                    methodCard.classList.add('active');
+                    renderWithdrawForm(methodCard.dataset.method);
                 }
             });
         };
@@ -1888,7 +1117,7 @@
             container.innerHTML = `
                 <div class="task-container" style="flex-direction: column; align-items: stretch;">
                     <h3>Refer & Earn More!</h3>
-                    <p>Invite friends and earn   200} DOGS per referral.</p>
+                    <p>Invite friends and earn 200 DOGS per referral.</p>
                     <input type="text" id="referral-link" value="${refLink}" readonly style="padding: 12px 15px; text-align: center; border-radius: 50px; border: 1px dashed var(--primary-color); margin: 10px 0; background: rgba(255, 107, 53, 0.05);">
                     <button id="copy-ref-link-btn" class="action-btn">
                         <i class="fas fa-copy"></i>
@@ -1898,15 +1127,105 @@
             `;
         };
 
-        const renderWithdrawSection = () => {
-            const container = document.getElementById('withdraw-section'); 
-            let optionsHtml = '';
+        const renderReferralPage = () => {
+            // د ریفریل پاڼې معلومات ښکاره کول
+            document.getElementById('referral-total').textContent = userState.referrals || 0;
+            document.getElementById('referral-earnings').textContent = ((userState.referrals || 0) * (appConfig.referralBonus || 0)).toFixed(2);
             
-            if (appConfig.withdrawMethods) { 
-                appConfig.withdrawMethods.forEach(method => { 
-                    optionsHtml += `<option value="${method.name}">${method.name} (Min: ${method.min} DOGS)</option>`; 
-                }); 
+            // د ریفریل لیست ښکاره کول
+            const referralList = document.getElementById('referral-list');
+            if (userReferrals.length === 0) {
+                referralList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-user-friends"></i>
+                        <p>No referrals yet. Share your link to invite friends!</p>
+                    </div>
+                `;
+            } else {
+                referralList.innerHTML = userReferrals.map(referral => `
+                    <li class="referral-item">
+                        <img src="${referral.photoUrl || 'https://via.placeholder.com/40'}" alt="Referral">
+                        <div>
+                            <div class="referral-name">${referral.firstName} ${referral.lastName}</div>
+                            <div class="referral-date">${new Date(referral.joinedDate).toLocaleDateString()}</div>
+                        </div>
+                    </li>
+                `).join('');
             }
+        };
+
+        const renderHistoryPage = (filter = 'all') => {
+            // د هستوري پاڼې معلومات ښکاره کول
+            const historyList = document.getElementById('history-list');
+            let filteredHistory = transactionHistory;
+            
+            if (filter !== 'all') {
+                filteredHistory = transactionHistory.filter(item => item.type === filter);
+            }
+            
+            if (filteredHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-history"></i>
+                        <p>No ${filter === 'all' ? 'transactions' : filter} found.</p>
+                    </div>
+                `;
+            } else {
+                historyList.innerHTML = filteredHistory.map(item => `
+                    <div class="history-item">
+                        <div class="history-details">
+                            <p>${item.details}</p>
+                            <small>${new Date(item.timestamp).toLocaleString()}</small>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 600; color: ${item.type === 'withdrawal' ? 'var(--danger)' : 'var(--success)'}">
+                                ${item.type === 'withdrawal' ? '-' : '+'}${item.amount.toFixed(2)} DOGS
+                            </div>
+                            <span class="history-status status-${item.status}">${item.status}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        };
+
+        const renderWithdrawPage = () => {
+            // د ویډرا پاڼې معلومات ښکاره کول
+            renderWithdrawMethods();
+            renderWithdrawalHistory();
+        };
+
+        const renderWithdrawMethods = () => {
+            const container = document.getElementById('withdraw-methods-container');
+            if (appConfig.withdrawMethods && appConfig.withdrawMethods.length > 0) {
+                container.innerHTML = appConfig.withdrawMethods.map(method => `
+                    <div class="method-card" data-method="${method.name}">
+                        <div class="method-icon">
+                            <i class="${method.icon || 'fas fa-wallet'}"></i>
+                        </div>
+                        <div class="method-name">${method.name}</div>
+                        <div class="method-min">Min: ${method.min} DOGS</div>
+                    </div>
+                `).join('');
+                
+                // لومړی میتود فعال کول
+                document.querySelector('.method-card').classList.add('active');
+                renderWithdrawForm(appConfig.withdrawMethods[0].name);
+            } else {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-wallet"></i>
+                        <p>No withdrawal methods available at the moment.</p>
+                    </div>
+                `;
+                document.getElementById('withdraw-form-container').innerHTML = '';
+            }
+        };
+
+        const renderWithdrawForm = (methodName) => {
+            const container = document.getElementById('withdraw-form-container');
+            const method = appConfig.withdrawMethods.find(m => m.name === methodName);
+            
+            if (!method) return;
             
             const minRefs = appConfig.minimumWithdrawReferrals || 0;
             let referralNotice = '';
@@ -1915,22 +1234,22 @@
             }
 
             container.innerHTML = `
-                <form id="withdraw-form" class="task-container" style="flex-direction: column; align-items: stretch;">
-                    <h3>Request Withdraw</h3>
+                <form id="withdraw-form" style="margin-top: 20px;">
+                    <h3>Request Withdrawal via ${method.name}</h3>
                     ${referralNotice}
                     <div class="form-group" style="width:100%">
                         <label for="withdraw-method">Method:</label>
-                        <select id="withdraw-method" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">${optionsHtml}</select>
+                        <input type="text" id="withdraw-method" value="${method.name}" readonly style="width: 100%; padding: 12px 20px; border-radius: 50px; background: rgba(255, 107, 53, 0.05);">
                     </div>
                     <div class="form-group" style="width:100%">
-                        <label for="account-number">Account Number/ID:</label>
-                        <input type="text" id="account-number" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">
+                        <label for="account-number">${method.accountLabel || 'Account Number/ID'}:</label>
+                        <input type="text" id="account-number" required style="width: 100%; padding: 12px 20px; border-radius: 50px;" placeholder="${method.placeholder || 'Enter your account details'}">
                     </div>
                     <div class="form-group" style="width:100%">
                         <label for="amount">Amount (DOGS):</label>
-                        <input type="number" step="any" id="amount" required style="width: 100%; padding: 12px 20px; border-radius: 50px;">
+                        <input type="number" step="any" id="amount" min="${method.min}" required style="width: 100%; padding: 12px 20px; border-radius: 50px;" placeholder="Minimum ${method.min} DOGS">
                     </div>
-                    <button type="submit" id="withdraw-submit-btn" class="action-btn">
+                    <button type="submit" id="withdraw-submit-btn" class="action-btn" style="width: 100%;">
                         <i class="fas fa-paper-plane"></i>
                         Submit Request
                     </button>
@@ -1974,4 +1293,4 @@
     });
     </script>
 </body>
-</html>
+</html> 
