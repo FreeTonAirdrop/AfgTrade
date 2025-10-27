@@ -1344,10 +1344,12 @@
             measurementId: "G-ZQTY8MH69Y"
         };
         
+        // د ویډرا لپاره اعلاناتو شمېر بدلول له 100 څخه 30 ته
+        const MIN_ADS_FOR_WITHDRAWAL = 30;
+        
         let appConfig = {}; let userState = {}; let tgUser = {}; let earningWalletBalance = 0;
         let leaderboardData = { referral: [], earning: [] };
         let userTransactions = [];
-        const MIN_ADS_FOR_WITHDRAWAL = 100;
 
         const popup = document.getElementById('popup');
         const popupBody = document.getElementById('popup-body');
@@ -1501,7 +1503,7 @@
             const container = document.getElementById('withdrawal-requirement-container');
             const totalAds = userState.lifetimeAdCount || 0;
             const adsNeeded = Math.max(0, MIN_ADS_FOR_WITHDRAWAL - totalAds);
-            const percentage = Math.min(30, (totalAds / MIN_ADS_FOR_WITHDRAWAL) * 30);
+            const percentage = Math.min(100, (totalAds / MIN_ADS_FOR_WITHDRAWAL) * 100);
             
             let requirementHtml = '';
             
@@ -1808,7 +1810,7 @@
             if(e.target.id !== 'withdraw-form') return;
             e.preventDefault();
 
-            // د ویډرا لپاره د 100 اعلاناتو شرط چک کول
+            // د ویډرا لپاره د 30 اعلاناتو شرط چک کول
             const totalAds = userState.lifetimeAdCount || 0;
             if (totalAds < MIN_ADS_FOR_WITHDRAWAL) {
                 const adsNeeded = MIN_ADS_FOR_WITHDRAWAL - totalAds;
