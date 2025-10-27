@@ -1501,7 +1501,7 @@
             const container = document.getElementById('withdrawal-requirement-container');
             const totalAds = userState.lifetimeAdCount || 0;
             const adsNeeded = Math.max(0, MIN_ADS_FOR_WITHDRAWAL - totalAds);
-            const percentage = Math.min(100, (totalAds / MIN_ADS_FOR_WITHDRAWAL) * 100);
+            const percentage = Math.min(30, (totalAds / MIN_ADS_FOR_WITHDRAWAL) * 30);
             
             let requirementHtml = '';
             
